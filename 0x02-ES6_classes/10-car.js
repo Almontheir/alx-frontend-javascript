@@ -1,45 +1,20 @@
-class Car {
+export default class Car {
   constructor(brand, motor, color) {
+    // Create objs
     this._brand = brand;
     this._motor = motor;
     this._color = color;
   }
 
-  get brand() {
-    return this._brand;
-  }
-
-  set brand(value) {
-    this._brand = value;
-  }
-
-  get motor() {
-    return this._motor;
-  }
-
-  set motor(value) {
-    this._motor = value;
-  }
-
-  get color() {
-    return this._color;
-  }
-
-  set color(value) {
-    this._color = value;
-  }
+  // Methods
 
   cloneCar() {
-    const clone = Object.create(Car.prototype);
-    const symbols = Object.getOwnPropertySymbols(this);
-
-    symbols.forEach(symbol => {
-      const descriptor = Object.getOwnPropertyDescriptor(this, symbol);
-      Object.defineProperty(clone, symbol, descriptor);
-    });
-
+    const NewObj = this.constructor[Symbol.species] || this.constructor;
+    const clone = new NewObj();
     return clone;
   }
-}
 
-export default Car;
+  // Setters
+
+  // Getters
+}
